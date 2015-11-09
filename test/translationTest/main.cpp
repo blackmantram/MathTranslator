@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "translator.h"
 
 int main(int argc, char **argv)
 {
@@ -9,4 +10,9 @@ int main(int argc, char **argv)
 
 TEST(TranslationTest, Start) {
     EXPECT_EQ(1, 1*1);
+}
+
+TEST(TranslationTest, CanTranslate) {
+    Translator translator;
+    translator.translate();
 }
