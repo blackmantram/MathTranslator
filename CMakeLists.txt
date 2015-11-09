@@ -5,3 +5,4 @@ PROJECT(MathTranslatorProject)
 ENABLE_TESTING()
 
 ADD_SUBDIRECTORY(main)
+ADD_SUBDIRECTORY(test)

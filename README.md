@@ -15,3 +15,11 @@ make
 ~~~
 cd build && main/mathTranslator
 ~~~
+
+##Testing
+
+~~~
+cd build && make test
+~~~
+
+This project was setup based on the articles in [this blog](http://kaizou.org)
