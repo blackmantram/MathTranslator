@@ -1,6 +1,10 @@
+#include <string>
+
 class Translator
 {
 public:
 	Translator();
-	void translate();
+	std::string translate(std::string);
+private:
+	bool hasExponential(std::string);
 };
