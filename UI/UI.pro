@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-12-11T11:24:46
+# Project created by QtCreator 2015-12-13T18:44:38
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = MathTranslator
+TARGET = UI
 TEMPLATE = app
 
 
