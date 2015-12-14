@@ -19,6 +19,21 @@ MainWindow::~MainWindow()
 
 QString MainWindow::translate(QString expression)
 {
+    /*if (isEquation(expression))
+    {
+        QStringList expressions = expression.split('=');
+        return QString(expressions[0]+" igual a "+expressions[1]);
+
+        for(int i=0;i<expressions.count();i++)
+        {
+            QString expression = expressions[i];
+        }
+    }*/
+    return translateExpression(expression);
+}
+
+QString MainWindow::translateExpression(QString expression)
+{
     if (expression.trimmed().length() == 0)
         return QString("");
     if (hasExponential(expression))
@@ -29,18 +44,21 @@ QString MainWindow::translate(QString expression)
         QString exponent = expresions[1];
         return QString(base+" a la "+exponent);
     }
-    /*return expression;*/
-    return QString("a a la dos más b a la dos igual a c a la dos");
+    return expression;
 }
 
 bool MainWindow::hasExponential(QString expression) {
-    return expression.toStdString().find("^") != string::npos;
+    return expression.count(QRegExp("([a-zA-Z0-9])\\^([a-zA-Z0-9])"));
+}
+
+bool MainWindow::isEquation(QString expression) {
+    return expression.count(QRegExp("={1,1}"));
 }
 
 void MainWindow::speak(QString text)
 {
     std::string stdString = "eSpeak -v es \""+text.toStdString()+"\"";
-    system(stdString.c_str());
+    //system(stdString.c_str());
 }
 
 void MainWindow::on_pushButton_clicked()

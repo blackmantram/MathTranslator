@@ -21,7 +21,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QString translate(QString expression);
+    QString translateExpression(QString expression);
     bool hasExponential(QString expression);
+    bool isEquation(QString expression);
     void speak(QString text);
 };
 
