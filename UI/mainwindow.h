@@ -22,8 +22,11 @@ private:
     Ui::MainWindow *ui;
     QString translate(QString expression);
     QString translateExpression(QString expression);
+    QString translateSingleExpression(QString expression);
+    QString translateMultipleExpressions(QString expression);
     bool hasExponential(QString expression);
     bool isEquation(QString expression);
+    bool containsMultipleExpressions(QString expression);
     void speak(QString text);
 };
 

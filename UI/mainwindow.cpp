@@ -19,20 +19,31 @@ MainWindow::~MainWindow()
 
 QString MainWindow::translate(QString expression)
 {
-    /*if (isEquation(expression))
+    QString translatedExpression("");
+    QStringList expressions (expression);
+    if (isEquation(expression))
     {
-        QStringList expressions = expression.split('=');
-        return QString(expressions[0]+" igual a "+expressions[1]);
-
-        for(int i=0;i<expressions.count();i++)
-        {
-            QString expression = expressions[i];
-        }
-    }*/
-    return translateExpression(expression);
+        expressions = expression.split('=');
+    }
+    for(int i=0;i<expressions.count();i++)
+    {
+        QString expression = expressions[i];
+        translatedExpression += translateExpression(expression);
+        if (i < expressions.count()-1)
+            translatedExpression += QString(" igual a ");
+    }
+    return translatedExpression;
 }
 
 QString MainWindow::translateExpression(QString expression)
+{
+    if (containsMultipleExpressions(expression))
+        return translateMultipleExpressions(expression);
+    else
+        return translateSingleExpression(expression);
+}
+
+QString MainWindow::translateSingleExpression(QString expression)
 {
     if (expression.trimmed().length() == 0)
         return QString("");
@@ -47,12 +58,29 @@ QString MainWindow::translateExpression(QString expression)
     return expression;
 }
 
+QString MainWindow::translateMultipleExpressions(QString expression)
+{
+    QString translatedExpressions ("");
+    QStringList expressions = expression.split(QRegExp("\\+|\\-"));
+    for(int i=0; i<expressions.count(); i++)
+    {
+        translatedExpressions += translateSingleExpression(expressions[i]);
+        if (i < expressions.count()-1)
+            translatedExpressions += QString(" más ");
+    }
+    return translatedExpressions;
+}
+
 bool MainWindow::hasExponential(QString expression) {
     return expression.count(QRegExp("([a-zA-Z0-9])\\^([a-zA-Z0-9])"));
 }
 
 bool MainWindow::isEquation(QString expression) {
     return expression.count(QRegExp("={1,1}"));
+}
+
+bool MainWindow::containsMultipleExpressions(QString expression) {
+    return expression.count(QRegExp("\\+|\\-"));
 }
 
 void MainWindow::speak(QString text)
